@@ -7,8 +7,8 @@
   (define data-dir
     (make-pathname (pathname-directory exec-dir) "data"))
 
-  (define window-width  600)
-  (define window-height 600)
+  (define window-width  816)
+  (define window-height 612)
   (define grid-columns  15)
   (define grid-rows     15)
 

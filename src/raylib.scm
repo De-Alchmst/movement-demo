@@ -73,24 +73,23 @@
   (dfl draw-fps             void "DrawFPS" int int)
   (dfl window-should-close? bool "WindowShouldClose")
 
-  (dfl* draw-rectangle void ((int x) (int y) (int w) (int h) (color-p ptr))
-    "Color c = *ptr;"
-    "DrawRectangle(x, y, w, h, c);")
+  (dfl* draw-rectangle void ((int x) (int y) (int w) (int h) (color-p c))
+    "DrawRectangle(x, y, w, h, *c);")
 
   (dfl* draw-rectangle-lines void
-    ((int x) (int y) (int w) (int h) (color-p ptr))
-    "Color c = *ptr;"
-    "DrawRectangleLines(x, y, w, h, c);")
+    ((int x) (int y) (int w) (int h) (color-p c))
+    "DrawRectangleLines(x, y, w, h, *c);")
     
-  (dfl* clear-background void ((color-p ptr))
-    "Color c = *ptr;"
-    "ClearBackground(c);")
+  (dfl* clear-background void ((color-p c))
+    "ClearBackground(*c);")
 
   (dfl* load-texture texture2d-p ((c-string str))
     "Texture2D* t = malloc(sizeof(Texture2D));"
-    "printf(\"%s\\n\", str);"
-    "LoadTexture(str);"
+    "*t = LoadTexture(str);"
     "C_return(t);")
+
+  (dfl* draw-texture void ((texture2d-p tex) (int x) (int y) (color-p c))
+    "DrawTexture(*tex, x, y, *c);")
 
 
   ;; extra fancy macros to make your life easier

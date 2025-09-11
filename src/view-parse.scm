@@ -1,10 +1,14 @@
-(module map-parse (get-view load-map)
+(module view-parse (get-view load-views default-view view-texture)
   (import scheme (chicken base)
-          map-data)
+          view-data)
 
 
-  (define (load-map)
+  (define (load-views)
     (load-textures))
+
+
+  (define (default-view)
+    (car view-maps))
 
 
   (define (get-view name)
@@ -23,4 +27,9 @@
       ((null? m) '())
       ((atom? (car m)) (from-map (cdr m) key))
       ((equal? (caar m) key) (cadar m))
-      (#t (from-map (cdr m) key)))))
+      (#t (from-map (cdr m) key))))
+
+
+  (define (view-texture view)
+    ((from-map view 'background))))
+

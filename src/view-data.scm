@@ -1,4 +1,4 @@
-(module map-data (view-maps parameters load-textures)
+(module view-data (view-maps parameters load-textures)
   (import scheme (chicken base)
           consts raylib)
 
@@ -11,9 +11,9 @@
   (define (load-textures)
     (set! textures
       `[(room-1 ,(load-texture (data/ "room-1.jpg")))
-        (room-2 ,(load-texture (data/ "room-2.jps")))
-        (room-3 ,(load-texture (data/ "room-3.jps")))
-        (room-4 ,(load-texture (data/ "room-4.jps")))]))
+        (room-2 ,(load-texture (data/ "room-2.jpg")))
+        (room-3 ,(load-texture (data/ "room-3.jpg")))
+        (room-4 ,(load-texture (data/ "room-4.jpg")))]))
 
 
   ; could use from-map, but I want it defined in map-parse.scm...
