@@ -89,7 +89,7 @@
   (dfl* load-texture texture2d-p ((c-string str))
     "Texture2D* t = malloc(sizeof(Texture2D));"
     "printf(\"%s\\n\", str);"
-    ; "LoadTextureFromImage(LoadImage(str));"
+    "LoadTexture(str);"
     "C_return(t);")
 
 

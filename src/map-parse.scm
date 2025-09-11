@@ -1,6 +1,10 @@
-(module map-parse (get-view)
+(module map-parse (get-view load-map)
   (import scheme (chicken base)
           map-data)
+
+
+  (define (load-map)
+    (load-textures))
 
 
   (define (get-view name)
