@@ -52,14 +52,25 @@
       vect))
 
 
+  (define-foreign-type texture2d-p (c-pointer "Texture2D"))
+  (define-foreign-record-type (<texture2d> "Texture2D")
+    (constructor: construct-texture2d)
+    (destructor:  destroy-texture2d)
+    (unsigned-int id texture2d-id set-texture2d-id!)
+    (int          width texture2d-width set-texture2d-width!)
+    (int          height texture2d-height set-texture2d-height!)
+    (int          mipmaps texture2d-mipmaps set-texture2d-mipmaps!)
+    (int          format texture2d-format set-texture2d-format!))
+
+
   ;; foreign functions
 
-  (dfl init-window          void "InitWindow"        int int c-string)
+  (dfl init-window          void "InitWindow" int int c-string)
   (dfl close-window         void "CloseWindow")
   (dfl begin-drawing        void "BeginDrawing")
   (dfl end-drawing          void "EndDrawing")
-  (dfl set-target-fps       void "SetTargetFPS"      int)
-  (dfl draw-fps             void "DrawFPS"           int int)
+  (dfl set-target-fps       void "SetTargetFPS" int)
+  (dfl draw-fps             void "DrawFPS" int int)
   (dfl window-should-close? bool "WindowShouldClose")
 
   (dfl* draw-rectangle void ((int x) (int y) (int w) (int h) (color-p ptr))
@@ -74,6 +85,12 @@
   (dfl* clear-background void ((color-p ptr))
     "Color c = *ptr;"
     "ClearBackground(c);")
+
+  (dfl* load-texture texture2d-p ((c-string str))
+    "Texture2D* t = malloc(sizeof(Texture2D));"
+    "printf(\"%s\\n\", str);"
+    ; "LoadTextureFromImage(LoadImage(str));"
+    "C_return(t);")
 
 
   ;; extra fancy macros to make your life easier

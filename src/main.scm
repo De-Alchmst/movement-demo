@@ -1,23 +1,24 @@
 (module main ()
   (import scheme (chicken base)
-          consts game-draw raylib)
+          consts game-draw map-parse raylib)
 
-  (define (init)
-    (init-window window-width window-height "a thing")
-    (set-target-fps 60))
-
-
-  (define (deinit)
-    (close-window))
+  ; (define (init)
+  ;   (init-window window-width window-height "a thing")
+  ;   (set-target-fps 60))
 
 
-  (define (main)
-    (draw
-      (draw-game))
+  ; (define (deinit)
+  ;   (close-window))
 
-    (if (not (window-should-close?))
-      (main)))
 
-  (init)
-  (main)
-  (deinit))
+  ; (define (main)
+  ;   (draw
+  ;     (draw-game))
+
+  ;   (if (not (window-should-close?))
+  ;     (main)))
+
+  ; (init)
+  ; (main)
+  ; (deinit))
+  (print (get-view 'room-1)))

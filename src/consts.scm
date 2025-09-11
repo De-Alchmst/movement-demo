@@ -1,6 +1,11 @@
 (module consts *
-  (import scheme (chicken base)
+  (import scheme (chicken base) (chicken process-context) (chicken pathname)
           raylib)
+
+  (define exec-dir
+    (pathname-directory (executable-pathname)))
+  (define data-dir
+    (make-pathname (pathname-directory exec-dir) "data"))
 
   (define window-width  600)
   (define window-height 600)
