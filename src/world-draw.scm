@@ -5,6 +5,15 @@
   (define (draw-world)
     (clear-background white)
     (draw-texture (view-texture current-view) 0 0 white)
-    (draw-fps 10 10)))
-  
+    (draw-highlight)
+    (draw-fps 10 10))
 
+  
+  (define (draw-highlight)
+    (cond
+      ((equal? current-selection 'left)
+       (draw-rectangle 0 0 side-margin window-height highlight-color))
+      ((equal? current-selection 'right)
+       (draw-rectangle (- window-width side-margin) 0
+                       side-margin window-height highlight-color)))))
+  

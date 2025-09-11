@@ -1,4 +1,6 @@
-(module view-parse (get-view load-views default-view view-texture)
+(module view-parse (get-view load-views
+                    default-view view-texture
+                    get-left-view get-right-view)
   (import scheme (chicken base)
           view-data)
 
@@ -31,5 +33,12 @@
 
 
   (define (view-texture view)
-    ((from-map view 'background))))
+    ((from-map view 'background)))
 
+
+  (define (get-left-view view)
+    (get-view (from-map view 'left)))
+
+
+  (define (get-right-view view)
+    (get-view (from-map view 'right))))

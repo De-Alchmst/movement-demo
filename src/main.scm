@@ -13,6 +13,7 @@
 
 
   (define (main)
+    (update-world)
     (draw
       (draw-world))
 

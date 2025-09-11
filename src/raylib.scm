@@ -65,13 +65,16 @@
 
   ;; foreign functions
 
-  (dfl init-window          void "InitWindow" int int c-string)
-  (dfl close-window         void "CloseWindow")
-  (dfl begin-drawing        void "BeginDrawing")
-  (dfl end-drawing          void "EndDrawing")
-  (dfl set-target-fps       void "SetTargetFPS" int)
-  (dfl draw-fps             void "DrawFPS" int int)
-  (dfl window-should-close? bool "WindowShouldClose")
+  (dfl init-window              void "InitWindow" int int c-string)
+  (dfl close-window             void "CloseWindow")
+  (dfl begin-drawing            void "BeginDrawing")
+  (dfl end-drawing              void "EndDrawing")
+  (dfl set-target-fps           void "SetTargetFPS" int)
+  (dfl draw-fps                 void "DrawFPS" int int)
+  (dfl window-should-close?     bool "WindowShouldClose")
+  (dfl get-mouse-x              int  "GetMouseX")
+  (dfl get-mouse-y              int  "GetMouseY")
+  (dfl is-mouse-button-pressed? bool "IsMouseButtonPressed" int)
 
   (dfl* draw-rectangle void ((int x) (int y) (int w) (int h) (color-p c))
     "DrawRectangle(x, y, w, h, *c);")
