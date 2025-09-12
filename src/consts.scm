@@ -29,4 +29,8 @@
 
 
   (define key-return 257)
-  (define key-space  32))
+  (define key-space  32)
+
+
+  (define cursor-default 0)
+  (define cursor-hand    4))

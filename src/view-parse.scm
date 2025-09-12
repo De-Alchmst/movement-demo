@@ -1,7 +1,9 @@
 (module view-parse (get-view load-views
                     default-view view-texture
-                    has-dir-view? get-dir-view)
+                    has-dir-view? get-dir-view
+                    (get-positional-view-selection))
   (import scheme (chicken base)
+          matchable
           view-data)
 
 
@@ -32,4 +34,23 @@
   
 
   (define (get-dir-view view dir)
-    (get-view (from-map view dir))))
+    (get-view (from-map view dir)))
+
+
+  ; test if mouse inside positional from list of positionals
+  ; if so, return it's contents, else return #f
+  (define (test-positional l mx my)
+    (if (null? l)
+      #f
+      (match-let ([((lx ly) (lw lh) contents) (car l)])
+        (if (and (>= mx lx) (<= mx (+ lx lw))
+                 (>= my ly) (<= my (+ ly lh)))
+          contents
+          (test-positional (cdr l) mx my)))))
+
+
+  (define (get-positional-view-selection view mx my)
+    (let ((p (test-positional (from-map view 'positional-views) mx my)))
+      (if p
+        (cons 'view p)
+        '()))))

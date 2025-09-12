@@ -81,6 +81,7 @@
   (dfl is-mouse-button-pressed? bool "IsMouseButtonPressed" int)
   (dfl get-key-pressed          int  "GetKeyPressed")
   (dfl is-key-pressed?          bool "IsKeyPressed" int)
+  (dfl set-mouse-cursor         void "SetMouseCursor" int)
 
   (dfl* draw-rectangle void ((int x) (int y) (int w) (int h) (color-p c))
     "DrawRectangle(x, y, w, h, *c);")

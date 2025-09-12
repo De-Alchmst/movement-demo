@@ -10,6 +10,10 @@
 
   
   (define (draw-highlight)
+    (if (pair? current-selection)
+      (set-mouse-cursor cursor-hand)
+      (set-mouse-cursor cursor-default))
+
     (cond
       ((equal? current-selection 'left)
        (draw-rectangle 0 0 side-margin window-height highlight-color))

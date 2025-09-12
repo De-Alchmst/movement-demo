@@ -26,8 +26,11 @@
         (bathroom-2-2 ,(load-texture (data/ "bathroom-2-2.jpg")))
         (bathroom-2-3 ,(load-texture (data/ "bathroom-2-3.jpg")))
         (bathroom-2-4 ,(load-texture (data/ "bathroom-2-4.jpg")))
-        (shower ,(load-texture (data/ "shower.jpg")))]))
-
+        (shower ,(load-texture (data/ "shower.jpg")))
+        (heatwave ,(load-texture (data/ "heatwave.jpg")))
+        (hall-door ,(load-texture (data/ "hall-door.jpg")))
+        (fridge ,(load-texture (data/ "fridge.jpg")))
+        (closet ,(load-texture (data/ "closet.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -58,15 +61,23 @@
                (background ,(img room-3))))
 
       (room-4 ((left  room-3)
-               (right room-1)
+               (right room-1) ;       (x y)    (w  h)    dest
+               (positional-views  (((630 310) (158 85) heatwave)))
                (background ,(img room-4))))
+
+      (heatwave ((back room-4)
+                 (background ,(img heatwave))))
 
       (hall-1 ((left  hall-4)
                (right hall-2)
+               (positional-views (((380 114) (140 106) hall-door)
+                                  ((437 214) (31  48 ) hall-door)))
                (background ,(img hall-1))))
 
       (hall-2 ((left  hall-1)
                (right hall-3)
+               (positional-views (((52 440) (196 172) fridge)
+                                  ((245 18) (298 590) closet)))
                (background ,(img hall-2))))
 
       (hall-3 ((left  hall-2)
@@ -78,6 +89,15 @@
                (right hall-1)
                (front bathroom-1-1)
                (background ,(img hall-4))))
+
+      (hall-door ((back hall-1)
+                  (background ,(img hall-door))))
+
+      (fridge ((back hall-2)
+               (background ,(img fridge))))
+
+      (closet ((back hall-2)
+               (background ,(img closet))))
 
       (bathroom-1-1 ((left  bathroom-1-4)
                      (right bathroom-1-2)

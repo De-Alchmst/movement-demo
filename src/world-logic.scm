@@ -34,11 +34,16 @@
            'back)
 
           (else
-           '())))))
+           (get-positional-view-selection current-view mx my))))))
 
 
   (define (handle-click)
     (if (is-mouse-button-pressed? mouse-left)
       (cond
+        ((null? current-selection))
         ((symbol? current-selection)
-         (set! current-view (get-dir-view current-view current-selection)))))))
+         (set! current-view
+               (get-dir-view current-view current-selection)))
+        ((equal? 'view  (car current-selection))
+         (set! current-view
+               (get-view (cdr current-selection))))))))
