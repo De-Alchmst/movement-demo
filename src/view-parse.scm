@@ -1,6 +1,6 @@
 (module view-parse (get-view load-views
                     default-view view-texture
-                    get-left-view get-right-view)
+                    has-dir-view? get-dir-view)
   (import scheme (chicken base)
           view-data)
 
@@ -36,9 +36,10 @@
     ((from-map view 'background)))
 
 
-  (define (get-left-view view)
-    (get-view (from-map view 'left)))
+  ; left right front back
+  (define (has-dir-view? view dir)
+    (not (null? (from-map view dir))))
+  
 
-
-  (define (get-right-view view)
-    (get-view (from-map view 'right))))
+  (define (get-dir-view view dir)
+    (get-view (from-map view dir))))

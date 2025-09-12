@@ -12,13 +12,26 @@
 
   
   (define (handle-select)
-    (let ((mx (get-mouse-x)))
+    (let ((mx (get-mouse-x))
+          (my (get-mouse-y)))
       (set! current-selection
         (cond
-          ((< mx side-margin)
+          ((and (< mx side-margin)
+                (has-dir-view? current-view 'left))
            'left)
-          ((> mx (- window-width side-margin))
+
+          ((and (> mx (- window-width side-margin))
+                (has-dir-view? current-view 'right))
            'right)
+
+          ((and (< my side-margin)
+                (has-dir-view? current-view 'front))
+           'front)
+
+          ((and (> my (- window-height side-margin))
+                (has-dir-view? current-view 'back))
+           'back)
+
           (#T
            '())))))
 
@@ -26,7 +39,5 @@
   (define (handle-click)
     (if (is-mouse-button-pressed? mouse-left)
       (cond
-        ((equal? current-selection 'left)
-         (set! current-view (get-left-view current-view)))
-        ((equal? current-selection 'right)
-         (set! current-view (get-right-view current-view)))))))
+        ((symbol? current-selection)
+         (set! current-view (get-dir-view current-view current-selection)))))))

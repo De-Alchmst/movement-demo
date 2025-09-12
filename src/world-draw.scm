@@ -15,5 +15,10 @@
        (draw-rectangle 0 0 side-margin window-height highlight-color))
       ((equal? current-selection 'right)
        (draw-rectangle (- window-width side-margin) 0
-                       side-margin window-height highlight-color)))))
+                       side-margin window-height highlight-color))
+      ((equal? current-selection 'front)
+       (draw-rectangle 0 0 window-width side-margin highlight-color))
+      ((equal? current-selection 'back)
+       (draw-rectangle 0 (- window-height side-margin)
+                       window-width side-margin highlight-color)))))
   
