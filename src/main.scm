@@ -1,10 +1,11 @@
 (module main ()
   (import scheme (chicken base)
-          consts world-logic world-draw view-parse raylib)
+          consts intro world-logic world-draw view-parse raylib)
 
   (define (init)
     (init-window window-width window-height "a thing")
     (load-views)
+    (load-consts) ; Yes, I know how it sounds, but trust me...
     (set-target-fps 60))
 
 
@@ -13,13 +14,12 @@
 
 
   (define (main)
-    (update-world)
-    (draw
-      (draw-world))
+    (when (update-world)
+      (draw
+        (draw-world))
 
-    (if (not (window-should-close?))
       (main)))
 
   (init)
-  (main)
+  (if (show-intro) (main))
   (deinit))

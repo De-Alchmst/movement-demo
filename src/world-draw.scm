@@ -5,8 +5,8 @@
   (define (draw-world)
     (clear-background white)
     (draw-texture (view-texture current-view) 0 0 white)
-    (draw-highlight)
-    (draw-fps 10 10))
+    (draw-highlight))
+    ; (draw-fps 10 10))
 
   
   (define (draw-highlight)

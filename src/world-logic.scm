@@ -8,7 +8,8 @@
 
   (define (update-world)
     (handle-select)
-    (handle-click))
+    (handle-click)
+    (not (window-should-close?)))
 
   
   (define (handle-select)

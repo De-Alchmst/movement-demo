@@ -5,6 +5,7 @@
   ;; FFI mechanism preparation
 
   (foreign-declare "#include <raylib.h>")
+  (foreign-declare "#define UNICODE")
 
   (define-syntax dfl
     (syntax-rules ()
@@ -63,6 +64,9 @@
     (int          format texture2d-format set-texture2d-format!))
 
 
+  (define-foreign-type font-p (c-pointer "Font"))
+
+
   ;; foreign functions
 
   (dfl init-window              void "InitWindow" int int c-string)
@@ -75,6 +79,8 @@
   (dfl get-mouse-x              int  "GetMouseX")
   (dfl get-mouse-y              int  "GetMouseY")
   (dfl is-mouse-button-pressed? bool "IsMouseButtonPressed" int)
+  (dfl get-key-pressed          int  "GetKeyPressed")
+  (dfl is-key-pressed?          bool "IsKeyPressed" int)
 
   (dfl* draw-rectangle void ((int x) (int y) (int w) (int h) (color-p c))
     "DrawRectangle(x, y, w, h, *c);")
@@ -93,6 +99,19 @@
 
   (dfl* draw-texture void ((texture2d-p tex) (int x) (int y) (color-p c))
     "DrawTexture(*tex, x, y, *c);")
+
+  (dfl* draw-text void ((c-string str) (int x) (int y)
+                        (int fontsize) (color-p c))
+    "DrawText(str, x, y, fontsize, *c);")
+
+  (dfl* load-font-e font-p ((c-string str) (int size))
+    "Font* f = malloc(sizeof(Font));"
+    "*f = LoadFontEx(str, size, NULL, 999);" ; values that work for my needs
+    "C_return(f);")
+
+  (dfl* draw-text-ex void ((font-p font) (c-string str) (vector2-p pos)
+                           (float size) (float spacing) (color-p color))
+    "DrawTextEx(*font, str, *pos, size, spacing, *color);")
 
 
   ;; extra fancy macros to make your life easier

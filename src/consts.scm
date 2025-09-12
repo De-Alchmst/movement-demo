@@ -7,10 +7,20 @@
   (define data-dir
     (make-pathname (pathname-directory exec-dir) "data"))
 
+  (define fira-code '())
+  (define (load-consts)
+    (set! fira-code
+      (load-font-e (make-pathname data-dir "FiraCode-Regular.ttf") 30)))
 
   (define window-width  816)
   (define window-height 612)
   (define side-margin   60)
+
+
+  (define white (make-color 255 255 255 255))
+  (define raywhite (make-color 245 245 245 255))
+  (define black (make-color 0 0 0 255))
+  (define highlight-color (make-color 255 255 255 100))
 
 
   (define mouse-left   0)
@@ -18,6 +28,5 @@
   (define mouse-middle 2)
 
 
-  (define white (make-color 255 255 255 255))
-  (define black (make-color 0 0 0 255))
-  (define highlight-color (make-color 255 255 255 100)))
+  (define key-return 257)
+  (define key-space  32))
