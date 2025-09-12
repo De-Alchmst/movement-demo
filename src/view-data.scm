@@ -34,7 +34,8 @@
         (glasses-case ,(load-texture (data/ "glasses-case.jpg")))
         (glasses ,(load-texture (data/ "glasses.jpg")))
         (shirt ,(load-texture (data/ "shirt.jpg")))
-        (backpack ,(load-texture (data/ "backpack.jpg")))]))
+        (backpack ,(load-texture (data/ "backpack.jpg")))
+        (not-yet ,(load-texture (data/ "not-yet.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -111,6 +112,9 @@
 
       (hall-1 ((left  hall-4)
                (right hall-2)
+               (front ,(lambda ()
+                           'not-yet))
+                           
                (positional-views (((380 114) (140 106) hall-door)
                                   ((437 214) (31  48 ) hall-door)))
                (background ,(img hall-1))))
@@ -199,5 +203,7 @@
                  ,(lambda ()
                     (if (get-param 'backpack-collected)
                       '()
-                      `(((384 419) ,((img backpack))))))))))))
+                      `(((384 419) ,((img backpack)))))))))
     
+      (not-yet ((back hall-1)
+                (background ,(img not-yet)))))))

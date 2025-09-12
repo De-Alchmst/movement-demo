@@ -1,6 +1,6 @@
 (module view-parse (get-view load-views
                     default-view view-texture
-                    has-dir-view? get-dir-view
+                    has-directional-view? get-directional-view
                     get-positional-view-selection
                     get-overlays)
   (import scheme (chicken base)
@@ -30,12 +30,12 @@
 
 
   ; left right front back
-  (define (has-dir-view? view dir)
+  (define (has-directional-view? view dir)
     (not (null? (from-map view dir))))
   
 
-  (define (get-dir-view view dir)
-    (get-view (from-map view dir)))
+  (define (get-directional-view view dir)
+    (get-view (to-val (from-map view dir))))
 
 
   (define (to-val v) ; WARNING: may also catch C pointers, eg. textures
