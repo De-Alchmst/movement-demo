@@ -10,11 +10,16 @@
 
 
   (define (default-view)
-    (car view-maps))
+    (cadar views-map))
+
+
+  (define (from-map m key)
+    (let ((i (assoc key m)))
+      (if i (cadr i) '())))
 
 
   (define (get-view name)
-    (get-maps-view view-maps name))
+    (from-map views-map name))
 
 
   (define (get-maps-view maps name)
@@ -22,14 +27,6 @@
       ((null? maps) '())
       ((equal? (from-map (car maps) 'name) name) (car maps))
       (#t (get-maps-view (cdr maps) name))))
-
-
-  (define (from-map m key)
-    (cond
-      ((null? m) '())
-      ((atom? (car m)) (from-map (cdr m) key))
-      ((equal? (caar m) key) (cadar m))
-      (#t (from-map (cdr m) key))))
 
 
   (define (view-texture view)
