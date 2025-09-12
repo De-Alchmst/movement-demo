@@ -31,10 +31,7 @@
 
   ; could use from-map, but I want it defined in map-parse.scm...
   (define (get-texture textures name)
-    (cond
-      ((null? textures) '())
-      ((equal? (caar textures) name) (cadar textures))
-      (#t (get-texture (cdr textures) name))))
+    (cadr (assoc 'name textures)))
 
 
   (define-syntax img
