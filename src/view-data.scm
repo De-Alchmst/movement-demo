@@ -31,7 +31,10 @@
         (hall-door ,(load-texture (data/ "hall-door.jpg")))
         (fridge ,(load-texture (data/ "fridge.jpg")))
         (closet ,(load-texture (data/ "closet.jpg")))
-        (glasses-case ,(load-texture (data/ "glasses-case.jpg")))]))
+        (glasses-case ,(load-texture (data/ "glasses-case.jpg")))
+        (glasses ,(load-texture (data/ "glasses.jpg")))
+        (shirt ,(load-texture (data/ "shirt.jpg")))
+        (backpack ,(load-texture (data/ "backpack.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -44,10 +47,15 @@
 
 
   (define parameters
-    '((glasses-case-collected #F)))
+    '((glasses-case-collected #F)
+      (glasses-collected #F)
+      (shirt-collected #F)
+      (backpack-collected #F)))
+
 
   (define (get-param name)
     (cadr (assoc name parameters)))
+
 
   (define (set-param name value)
     (set! parameters
@@ -87,7 +95,19 @@
                (background ,(img room-4))))
 
       (heatwave ((back room-4)
-                 (background ,(img heatwave))))
+                 (positional-events
+                   ,(lambda ()
+                      (if (get-param 'glasses-collected)
+                        '()
+                        `[((394 244) (116 72)
+                           ,(lambda () (set-param 'glasses-collected #t)))])))
+                 (background ,(img heatwave))
+                 (overlays
+                   ,(lambda ()
+                      (if (get-param 'glasses-collected)
+                        '()
+                        `(((363 241) ,((img glasses)))))))))
+                
 
       (hall-1 ((left  hall-4)
                (right hall-2)
@@ -118,7 +138,18 @@
                (background ,(img fridge))))
 
       (closet ((back hall-2)
-               (background ,(img closet))))
+               (positional-events
+                 ,(lambda ()
+                    (if (get-param 'shirt-collected)
+                      '()
+                      `[((421 125) (162 396)
+                         ,(lambda () (set-param 'shirt-collected #t)))])))
+               (background ,(img closet))
+               (overlays
+                 ,(lambda ()
+                    (if (get-param 'shirt-collected)
+                      '()
+                      `(((410 91) ,((img shirt)))))))))
 
       (bathroom-1-1 ((left  bathroom-1-4)
                      (right bathroom-1-2)
@@ -157,5 +188,16 @@
                      (background ,(img bathroom-2-4))))
 
       (shower ((back bathroom-2-2)
-               (background ,(img shower)))))))
+               (positional-events
+                 ,(lambda ()
+                    (if (get-param 'backpack-collected)
+                      '()
+                      `[((390 424) (117 160)
+                         ,(lambda () (set-param 'backpack-collected #t)))])))
+               (background ,(img shower))
+               (overlays
+                 ,(lambda ()
+                    (if (get-param 'backpack-collected)
+                      '()
+                      `(((384 419) ,((img backpack))))))))))))
     

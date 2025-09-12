@@ -7,7 +7,7 @@
   (define font-spacing 0)
 
   (define intro-text
-    "Jsi student ZCU, ale kvůli včerejší pařbě jsi zapoměl
+    "Jsi student ZČU, ale kvůli včerejší pařbě jsi zapoměl
 že je neděle, tudíž jsi pařil ještě víc než obvykle.
 Dnes jsi v důsledku tohoto omylu zaspal.
 Rychle! Obleč se, najdi brýle, pouzdro na ně a batoh
