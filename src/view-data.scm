@@ -1,6 +1,6 @@
 (module view-data (views-map parameters load-textures)
   (import scheme (chicken base)
-          consts raylib)
+          consts raylib srfi-1)
 
   (define (data/ str)
     (string-append data-dir "/" str))
@@ -30,7 +30,8 @@
         (heatwave ,(load-texture (data/ "heatwave.jpg")))
         (hall-door ,(load-texture (data/ "hall-door.jpg")))
         (fridge ,(load-texture (data/ "fridge.jpg")))
-        (closet ,(load-texture (data/ "closet.jpg")))]))
+        (closet ,(load-texture (data/ "closet.jpg")))
+        (glasses-case ,(load-texture (data/ "glasses-case.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -43,7 +44,16 @@
 
 
   (define parameters
-    '())
+    '((glasses-case-collected #F)))
+
+  (define (get-param name)
+    (cadr (assoc name parameters)))
+
+  (define (set-param name value)
+    (set! parameters
+      (cons (list name value)
+        (filter (lambda (x) (not (equal? (car x) name)))
+                parameters))))
 
 
   (define views-map
@@ -53,7 +63,18 @@
        
       (room-2 ((left  room-1)
                (right room-3)
-               (background ,(img room-2))))
+               (positional-events
+                 ,(lambda ()
+                    (if (get-param 'glasses-case-collected)
+                      '()
+                      `[((491 470) (38 26)
+                         ,(lambda () (set-param 'glasses-case-collected #t)))])))
+               (background ,(img room-2))
+               (overlays
+                 ,(lambda ()
+                    (if (get-param 'glasses-case-collected)
+                       '()
+                       `(((477 449) ,((img glasses-case))))))))) 
 
       (room-3 ((left  room-2)
                (right room-4)

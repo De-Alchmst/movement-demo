@@ -44,6 +44,10 @@
         ((symbol? current-selection)
          (set! current-view
                (get-dir-view current-view current-selection)))
-        ((equal? 'view  (car current-selection))
+
+        ((equal? 'view (car current-selection))
          (set! current-view
-               (get-view (cdr current-selection))))))))
+               (get-view (cdr current-selection))))
+    
+        ((equal? 'event (car current-selection))
+         ((cdr current-selection)))))))

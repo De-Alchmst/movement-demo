@@ -1,7 +1,8 @@
 (module view-parse (get-view load-views
                     default-view view-texture
                     has-dir-view? get-dir-view
-                    (get-positional-view-selection))
+                    get-positional-view-selection
+                    get-overlays)
   (import scheme (chicken base)
           matchable
           view-data)
@@ -37,6 +38,10 @@
     (get-view (from-map view dir)))
 
 
+  (define (to-val v) ; WARNING: may also catch C pointers, eg. textures
+    (if (procedure? v) (v) v))
+
+
   ; test if mouse inside positional from list of positionals
   ; if so, return it's contents, else return #f
   (define (test-positional l mx my)
@@ -50,7 +55,16 @@
 
 
   (define (get-positional-view-selection view mx my)
-    (let ((p (test-positional (from-map view 'positional-views) mx my)))
-      (if p
-        (cons 'view p)
-        '()))))
+    (let ((v (test-positional
+               (to-val (from-map view 'positional-views)) mx my)))
+      (if v
+        (cons 'view v)
+        (let ((e (test-positional
+                   (to-val (from-map view 'positional-events)) mx my)))
+          (if e
+            (cons 'event e)
+            '())))))
+
+
+  (define (get-overlays view)
+    (to-val (from-map view 'overlays))))

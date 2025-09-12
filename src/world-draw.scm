@@ -1,12 +1,21 @@
 (module world-draw (draw-world)
   (import scheme (chicken base)
+          matchable
           consts view-parse world-logic raylib)
 
   (define (draw-world)
     (clear-background white)
     (draw-texture (view-texture current-view) 0 0 white)
+    (draw-overlays)
     (draw-highlight))
     ; (draw-fps 10 10))
+
+
+  (define (draw-overlays)
+    (for-each (lambda (l)
+                (match l [((x y) texture) (draw-texture texture x y white)]))
+              (get-overlays current-view)))
+           
 
   
   (define (draw-highlight)
