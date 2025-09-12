@@ -32,7 +32,7 @@
                 (has-dir-view? current-view 'back))
            'back)
 
-          (#T
+          (else
            '())))))
 
 

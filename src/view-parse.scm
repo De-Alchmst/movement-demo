@@ -22,13 +22,6 @@
     (from-map views-map name))
 
 
-  (define (get-maps-view maps name)
-    (cond
-      ((null? maps) '())
-      ((equal? (from-map (car maps) 'name) name) (car maps))
-      (#t (get-maps-view (cdr maps) name))))
-
-
   (define (view-texture view)
     ((from-map view 'background)))
 
