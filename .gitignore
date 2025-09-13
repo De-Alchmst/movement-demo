@@ -5,4 +5,5 @@ main
 *.link
 *.import.scm
 package
+movement-demo
 *.gz

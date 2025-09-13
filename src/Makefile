@@ -10,11 +10,11 @@ static:
 	csm
 
 package: static
-	mkdir -p package
-	cp -R ../data package/
-	cp main package/
-	cp ../LICENSE package/
-	tar -caf movement-demo.tar.gz package
+	mkdir -p movement-demo
+	cp -R ../data movement-demo/
+	cp main movement-demo/
+	cp ../LICENSE movement-demo/
+	tar -caf movement-demo.tar.gz movement-demo
 
 clean:
-	rm -fr main *.o *.so *.import.scm *.link package
+	rm -fr main *.o *.so *.import.scm *.link movement-demo
