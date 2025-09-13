@@ -22,6 +22,5 @@
       (main)))
 
   (init)
-  ; (if (show-intro) (main))
-  (main)
+  (if (show-intro) (main))
   (deinit))
