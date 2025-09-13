@@ -39,7 +39,8 @@
         (win-screen ,(load-texture (data/ "yet.jpg")))
         (pepe ,(load-texture (data/ "petscii-pepe.jpg")))
         (shrooms ,(load-texture (data/ "shrooms.jpg")))
-        (toilet ,(load-texture (data/ "toilet.jpg")))]))
+        (toilet ,(load-texture (data/ "toilet.jpg")))
+        (word ,(load-texture (data/ "word.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -72,6 +73,7 @@
   (define views-map
     `((room-1 ((left  room-4)
                (right room-2)
+               (positional-views [((494 260) (85 56) 'word)])
                (background ,(img room-1))))
        
       (room-2 ((left  room-1)
@@ -233,4 +235,7 @@
                 (background ,(img shrooms))))
 
       (pepe ((back room-2)
-             (background ,(img pepe)))))))
+             (background ,(img pepe))))
+
+      (word ((back room-1)
+             (background word))))))
