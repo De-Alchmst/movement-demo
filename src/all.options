@@ -1,1 +1,0 @@
--program main -L -L/usr/local/lib -L -lraylib

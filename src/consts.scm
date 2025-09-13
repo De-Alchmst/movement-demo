@@ -1,11 +1,14 @@
 (module consts *
-  (import scheme (chicken base) (chicken process-context) (chicken pathname)
+  (import scheme (chicken base) (chicken process-context)
+          (chicken pathname) (chicken file)
           raylib)
 
   (define exec-dir
     (pathname-directory (executable-pathname)))
   (define data-dir
-    (make-pathname (pathname-directory exec-dir) "data"))
+    (if (directory-exists? (make-pathname exec-dir "data"))
+      (make-pathname exec-dir "data")
+      (make-pathname (pathname-directory exec-dir) "data")))
 
   (define fira-code '())
   (define (load-consts)

@@ -1,4 +1,8 @@
+all.options
 main
 *.o
 *.so
+*.link
 *.import.scm
+package
+*.gz
