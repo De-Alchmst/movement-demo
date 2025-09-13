@@ -35,7 +35,8 @@
         (glasses ,(load-texture (data/ "glasses.jpg")))
         (shirt ,(load-texture (data/ "shirt.jpg")))
         (backpack ,(load-texture (data/ "backpack.jpg")))
-        (not-yet ,(load-texture (data/ "not-yet.jpg")))]))
+        (not-yet ,(load-texture (data/ "not-yet.jpg")))
+        (win-screen ,(load-texture (data/ "yet.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -113,7 +114,12 @@
       (hall-1 ((left  hall-4)
                (right hall-2)
                (front ,(lambda ()
-                           'not-yet))
+                           (if (and (get-param 'glasses-collected)
+                                    (get-param 'glasses-case-collected)
+                                    (get-param 'shirt-collected)
+                                    (get-param 'backpack-collected))
+                             'win-screen
+                             'not-yet)))
                            
                (positional-views (((380 114) (140 106) hall-door)
                                   ((437 214) (31  48 ) hall-door)))
@@ -206,4 +212,10 @@
                       `(((384 419) ,((img backpack)))))))))
     
       (not-yet ((back hall-1)
-                (background ,(img not-yet)))))))
+                (background ,(img not-yet))))
+
+      (win-screen ((background ,(img win-screen))
+                   (positional-events [((660 562) (149 37)
+                                        ,(lambda ()
+                                           (open-url
+                                             "https://github.com/de-alchmst")))]))))))
