@@ -8,7 +8,7 @@ a
 Program je výjimečně v češtině, neb jsem se cítil trochu nostalgicky.
 Pokud česky neumíte, o nic tak úžasného nepřicházíte.
 
-## compiling
+## kompilace
 
 Standardní build utils, chicken scheme a raylib musí být nainstalované.
 
@@ -20,12 +20,12 @@ make static  # to build static executable
 make package # to build a static executable and package it 
 ```
 
-## assets used
+## použité assety
 
-### fonts:
+### fonty:
 * [FiraCode](https://github.com/tonsky/FiraCode)
 
-### image-sources:
+### zdroje obrázků:
 * [gif cities](https://gifcities.org/)
 * [4chan.org](https://4chan.org)
-* the collective wisdom of the internet
+* kolektivní moudrost internetu
