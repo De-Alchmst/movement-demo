@@ -15,9 +15,9 @@ Standardní build utils, chicken scheme a raylib musí být nainstalované.
 ```
 cd src/
 chicken-install csm foreigners matchable srfi-1
-make         # to build dyamic executable (reccommended)
-make static  # to build static executable
-make package # to build a static executable and package it 
+make         # pro dynamickou binárku (doporučeno)
+make static  # pro statickou binárku
+make package # pro statickou binárku, které se rovnou zabalí to .tar.gz
 ```
 
 ## použité assety
