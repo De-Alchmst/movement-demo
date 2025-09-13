@@ -36,7 +36,10 @@
         (shirt ,(load-texture (data/ "shirt.jpg")))
         (backpack ,(load-texture (data/ "backpack.jpg")))
         (not-yet ,(load-texture (data/ "not-yet.jpg")))
-        (win-screen ,(load-texture (data/ "yet.jpg")))]))
+        (win-screen ,(load-texture (data/ "yet.jpg")))
+        (pepe ,(load-texture (data/ "petscii-pepe.jpg")))
+        (shrooms ,(load-texture (data/ "shrooms.jpg")))
+        (toilet ,(load-texture (data/ "toilet.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -168,6 +171,7 @@
 
       (bathroom-1-2 ((left  bathroom-1-1)
                      (right bathroom-1-3)
+                     (front toilet)
                      (background ,(img bathroom-1-2))))
 
       (bathroom-1-3 ((left  bathroom-1-2)
@@ -179,8 +183,12 @@
                      (right bathroom-1-1)
                      (background ,(img bathroom-1-4))))
 
+      (toilet ((back bathroom-1-2)
+               (background ,(img toilet))))
+
       (bathroom-2-1 ((left  bathroom-2-4)
                      (right bathroom-2-2)
+                     (front shrooms)
                      (background ,(img bathroom-2-1))))
 
       (bathroom-2-2 ((left  bathroom-2-1)
@@ -218,4 +226,11 @@
                    (positional-events [((660 562) (149 37)
                                         ,(lambda ()
                                            (open-url
-                                             "https://github.com/de-alchmst")))]))))))
+                                             "https://github.com/de-alchmst")))])))
+
+      (shrooms ((front pepe)
+                (back bathroom-2-1)
+                (background ,(img shrooms))))
+
+      (pepe ((back room-2)
+             (background ,(img pepe)))))))
