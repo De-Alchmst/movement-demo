@@ -40,7 +40,9 @@
         (pepe ,(load-texture (data/ "petscii-pepe.jpg")))
         (shrooms ,(load-texture (data/ "shrooms.jpg")))
         (toilet ,(load-texture (data/ "toilet.jpg")))
-        (word ,(load-texture (data/ "word.jpg")))]))
+        (word ,(load-texture (data/ "word.jpg")))
+        (meta ,(load-texture (data/ "meta.jpg")))
+        (gopher ,(load-texture (data/ "gopher.jpg")))]))
 
   (define (get-texture textures name)
     (cadr (assoc name textures)))
@@ -73,7 +75,8 @@
   (define views-map
     `((room-1 ((left  room-4)
                (right room-2)
-               (positional-views [((494 260) (85 56) 'word)])
+               (positional-views (((494 260) (85  56) word)
+                                  ((605 255) (104 58) meta)))
                (background ,(img room-1))))
        
       (room-2 ((left  room-1)
@@ -97,8 +100,8 @@
                (background ,(img room-3))))
 
       (room-4 ((left  room-3)
-               (right room-1) ;       (x y)    (w  h)    dest
-               (positional-views  (((630 310) (158 85) heatwave)))
+               (right room-1) ;      (x y)    (w  h)    dest
+               (positional-views (((630 310) (158 85) heatwave)))
                (background ,(img room-4))))
 
       (heatwave ((back room-4)
@@ -150,6 +153,8 @@
                   (background ,(img hall-door))))
 
       (fridge ((back hall-2)
+               (positional-views (((577 277) (128 197) gopher)
+                                  ((515 237) (92  173) gopher)))
                (background ,(img fridge))))
 
       (closet ((back hall-2)
@@ -238,4 +243,10 @@
              (background ,(img pepe))))
 
       (word ((back room-1)
-             (background word))))))
+             (background ,(img word))))
+
+      (meta ((back room-1)
+             (background ,(img meta))))
+
+      (gopher ((back fridge)
+               (background ,(img gopher)))))))

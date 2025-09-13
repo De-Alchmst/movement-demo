@@ -83,6 +83,7 @@
   (dfl is-key-pressed?          bool "IsKeyPressed" int)
   (dfl set-mouse-cursor         void "SetMouseCursor" int)
   (dfl open-url                 void "OpenURL" c-string)
+  (dfl set-exit-key             void "SetExitKey" int)
 
   (dfl* draw-rectangle void ((int x) (int y) (int w) (int h) (color-p c))
     "DrawRectangle(x, y, w, h, *c);")
